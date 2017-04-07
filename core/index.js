@@ -1,22 +1,27 @@
-var baseNews = function () {
-    this.name='xiawei';
+var BaseNews = function bb ()
+{
+    if(this instanceof bb) {
+        console.log("父类初始化");
+    }
+    this.display=function() {
+        console.log('父类的方法display')
+    }
 };
 
-function first () {
-    baseNews.call(this);
-    this.age=18;
-    console.log(this);
-}
+Function.prototype.extends = function (base) {
+    base.call(this.prototype);
+    this.prototype.father = new base();
+};
+//////////////////////////////////////////////////////////////
 
-function second () {
-    first.call(this);
-}
+var SportsNews = function () {
+    this.version = "1.0";
+    this.display = function () {
+        console.log("子类的方法display")
+    }
+};
+SportNews.extends(BaseNews);
 
-//var me = new first();
-var me2 = new second();
-
-
-console.log(me2.name);
-console.log(me2.age);
-
-
+var sn = new SportNews();
+sn.father.display();
+sn.display();
