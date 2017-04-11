@@ -1,9 +1,6 @@
-/**
- * Created by xiawei on 2017/4/10.
- */
-import bbb,{BaseNews,version} from './BaseNews.js';
+import OrderFactory from './Orders'
 
-var news = new BaseNews();
-news.display();
-console.log(bbb);
-console.log(version);
+var initData = ["001",,200];//延展操作符
+var mainOrder = OrderFactory.create("main",...initData);
+
+console.log(mainOrder)

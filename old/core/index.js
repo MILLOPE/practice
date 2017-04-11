@@ -49,6 +49,7 @@ var proxy = new Proxy(sn,{
         if(name=="version") {
             console.log("不要胡搞")
         }
+        return true;
     }
 });
 console.log(proxy.version);
