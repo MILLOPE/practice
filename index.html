@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button id="btn">复制插入</button>
+    <div id="box" style="overflow: hidden;background: #ececec">
+        <div id="a1">
+            <span class="aaa">111</span>
+            <input type="text" name="input_1" value="111">
+        </div>
+    </div>
+
+
+    <script>
+        var no = 1;
+        document.getElementById('btn').addEventListener('click',function(){
+            no++;
+            console.log('click')
+            var div = document.getElementById('a1');//捕捉标签
+            var clone = div.cloneNode(true);//复制标签，保存到变量里
+            clone.setAttribute('id','a'+no);//修改属性
+            var aaa = clone.getElementsByClassName("aaa")[0];
+            aaa.setAttribute('id','child'+no);//获取子标签，并修改id
+            aaa.nextElementSibling.setAttribute("value",'222');
+            document.getElementById('box').appendChild(clone);
+        });
+        //绑定点击事件
+        document.getElementById('box').addEventListener('click',function(event){
+            if(event.target.getAttribute('class')==='aaa') {
+                //点击到数字时（span标签时），执行的业务代码
+                //显示
+                alert('show')
+            }
+            if(event.target.getAttribute('class')==='bbb') {
+                //点击到数字时（span标签时），执行的业务代码
+                //隐藏
+                alert(hide)
+            }
+        })
+    </script>
+    <script type="text/"></script>
+</body>
+</html>

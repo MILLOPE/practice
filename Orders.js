@@ -12,12 +12,12 @@ const DetailOrder = {  //子订单
     ProdPrice: 0.00
 };
 export default{ //简单工厂模式
-    create(name, OrderNo, OrderUser, ProdsNum) //创建一个实体类，
+    create(name, ...args) //创建一个实体类，
     {
         if (name == "main") {
-            MainOrder.OrderNo = OrderNo;
-            MainOrder.OrderUser = OrderUser;
-            MainOrder.ProdsNum = ProdsNum;
+            MainOrder.OrderNo = args[0];
+            MainOrder.OrderUser = args[1];
+            MainOrder.ProdsNum = args[2];
             return MainOrder;
         }
         else if (name == "detail") {
