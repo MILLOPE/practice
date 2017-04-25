@@ -9,6 +9,7 @@ $title="用户登录";
 //用户运行函数
 function run()
 {
+    echo $_SERVER["REQUEST_URI"];
     include("/pro1/ui/userlogin.php");
 }
 
