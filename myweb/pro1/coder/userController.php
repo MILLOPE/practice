@@ -5,8 +5,11 @@
  */
 $title="用户登录";
 
-$userName=$_GET["userName"];
-if($userName)
-echo "当前用户名是".$userName;
-    
+
+//用户运行函数
+function run()
+{
+    include("/pro1/ui/userlogin.php");
+}
+
 ?>
