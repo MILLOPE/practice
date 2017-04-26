@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>新闻列表 | 网站名称 | jtthink</title>
+        <title><?php echo $title?> | 网站名称 | jtthink</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
         <style>
             
