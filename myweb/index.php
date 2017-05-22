@@ -1,6 +1,7 @@
 ﻿<?php
     require("config.php");
     //0、加载项目经理做的代码
+    require(Pro_RootPath."../leader.php");
     require(Pro_RootPath."phpBoss.php");
 
     //1、首先加载程序员的程序
@@ -10,7 +11,7 @@
     require($mFile);
     
     //2、加载DBA的程序
-    $userisvip=true; //临时变量
+    $userisvip=false; //临时变量
     
     //3、加载UI做的页面
     

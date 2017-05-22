@@ -3,7 +3,7 @@
  * 作者：张三
  * 类功能：用户登录、注册其他个人修改等
  */
-class userController
+class userController extends phpBoss
 {
     var $_tpl_vars=array("title"=>"用户登录");
     
@@ -11,7 +11,7 @@ class userController
     function run()
     {
     	extract($this->getTplVars());
-        echo $_SERVER["REQUEST_URI"];
+        //echo $_SERVER["REQUEST_URI"];
         include("/pro1/ui/userlogin.php");
     }
     function getTplVars()
