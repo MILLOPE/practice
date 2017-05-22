@@ -3,7 +3,7 @@
  * 作者：李四
  * 类功能：处理新闻数据的获取
  */
-class newsController
+class newsController extends phpBoss
 {
 	var $_tpl_vars=array("title"=>"新闻列表");
     //运行新闻的程序

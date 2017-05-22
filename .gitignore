@@ -38,3 +38,12 @@ jspm_packages
 
 #webstorm
 .idea
+
+#hbuider
+myweb/.project
+
+#apache
+apache
+
+#php
+php
