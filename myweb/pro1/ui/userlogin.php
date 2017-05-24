@@ -1,8 +1,7 @@
 <?php include("header.php");?>
-<div class="login" method="get">
+<div class="login">
     <p class="title"><?php echo $title ?></p>
-    <form action="/index.php?m=user">
-        <div><input type="hidden" name="m" value="user"/></div>
+    <form method="post">
 
         <div>用户名：</div>
         <div><input type="text" name="userName"/></div>

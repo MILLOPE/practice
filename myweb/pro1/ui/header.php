@@ -11,7 +11,7 @@
     <div style="border-bottom: 1px solid gray;line-height: 21pt;background: #ececec">
         <?php echo WebSiteName;?>
         	<?php if(!$this->_isinner) echo " && 旗下BB网" ?>
-        <a href="index.php?m=news">主站新闻</a> |
-        <a href="index.php?m=bbnews">bb网新闻</a> |
-        <a href="index.php?m=user">用户登录</a> |
+        <a href="/news">主站新闻</a> |
+        <a href="/bbnews">bb网新闻</a> |
+        <a href="/user">用户登录</a> |
     </div>
