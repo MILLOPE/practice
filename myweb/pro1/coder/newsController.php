@@ -15,6 +15,9 @@ class newsController extends phpBoss
             include("/pro1/ui/newslist_vip.php");
         else
             include("/pro1/ui/newslist.php");
+        $db=new dbutil();
+        $ret=$db->queryForArray("select * from news");
+        var_export($ret);
     }
     function getTplVars()
     {
