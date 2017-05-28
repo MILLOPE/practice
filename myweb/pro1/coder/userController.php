@@ -21,7 +21,8 @@ class userController extends phpBoss
         //$ret=$db->queryForArray($sql);
         
         $sql="select * from myuser where user_name=:username";
-        $ret=$db->queryForParam($sql,$_POST["userName"]);
+        $setParam=array("username"=>$_POST["userName"]);
+        $ret=$db->queryForParam($sql,$setParam);
         
         //var_export($ret);echo "<br>";
        		
