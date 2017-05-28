@@ -12,7 +12,7 @@ class dbutil
 		$result=$this->db->query($sql);
 		//不设置，同时显示列名序号;
 		$result->setFetchMode(PDO::FETCH_ASSOC);//只出现列名;
-		$result->setFetchMode(PDO::FETCH_NUM);//只显示序号;
+		//$result->setFetchMode(PDO::FETCH_NUM);//只显示序号;
 		return $result->fetchAll();
 	}
 }
