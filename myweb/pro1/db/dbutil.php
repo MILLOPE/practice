@@ -15,6 +15,16 @@ class dbutil
 		//$result->setFetchMode(PDO::FETCH_NUM);//只显示序号;
 		return $result->fetchAll();
 	}
+	function queryForParam($sql,$username) {
+		$pre_result=$this->db->prepare($sql);
+		//var_export($pre_result);
+		
+		$pre_result->bindParam(":username",$username);	
+		$pre_result->execute();
+		
+		$pre_result->setFetchMode(PDO::FETCH_ASSOC);
+		return $pre_result->fetchAll();
+	}
 }
 
 

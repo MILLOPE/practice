@@ -17,10 +17,14 @@ class userController extends phpBoss
         }
         
         $db=new dbutil();
-        $sql="select * from myuser where user_name='".$_POST["userName"]."'";
-        $ret=$db->queryForArray($sql);
-       	//var_export($ret);echo "<br>";
-       	
+        //$sql="select * from myuser where user_name='".$_POST["userName"]."'";
+        //$ret=$db->queryForArray($sql);
+        
+        $sql="select * from myuser where user_name=:username";
+        $ret=$db->queryForParam($sql,$_POST["userName"]);
+        
+        //var_export($ret);echo "<br>";
+       		
        	if($ret && count($ret)==1) {
        		$ret=$ret[0];
        		if($ret["user_pass"]==$_POST["userPass"]) {
