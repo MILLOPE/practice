@@ -10,7 +10,26 @@ class userController extends phpBoss
     //用户运行函数
     function run()
     {
-        if($_COOKIE["UserInfo_UserName"] && trim($_COOKIE["UserInfo_UserName"])!="") {
+        extract($this->getTplVars());
+        //echo $_SERVER["REQUEST_URI"];
+        
+        $get_action=$_GET["action"];
+ 		
+ 		if(method_exists($this, $get_action)) 
+		{
+			$this->$get_action();
+		}
+		
+    }
+	
+	function reg()
+	{
+		include(Pro_RootPath."../ui/userreg.php");
+	}
+	
+	function login()
+	{
+		if($_COOKIE["UserInfo_UserName"] && trim($_COOKIE["UserInfo_UserName"])!="") {
             //如果用户已经登录，则不许用户进入登录界面;
             header("location:/news");
             exit();
@@ -51,11 +70,10 @@ class userController extends phpBoss
                 echo "错误的用户名";
             }
         }*/
+        
+        include(Pro_RootPath."../ui/userlogin.php");
+	}
 
-    	extract($this->getTplVars());
-        //echo $_SERVER["REQUEST_URI"];
-        include("/pro1/ui/userlogin.php");
-    }
     function getTplVars()
     {
     	return $this->_tpl_vars;

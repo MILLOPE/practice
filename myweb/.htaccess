@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-
+    
     RewriteCond %{QUERY_STRING} ^(.*)
-    RewriteRule ^(\w{2,10})$  /index.php?m=$1&%1
+    RewriteRule ^(\w{2,10})(\/)?(\w{2,10})?$  /index.php?m=$1&action=$3&%1
 </IfModule>
