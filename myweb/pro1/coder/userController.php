@@ -13,13 +13,7 @@ class userController extends phpBoss
         extract($this->getTplVars());
         //echo $_SERVER["REQUEST_URI"];
         
-        $get_action=$_GET["action"];
- 		
- 		if(method_exists($this, $get_action)) 
-		{
-			$this->$get_action();
-		}
-		
+        include(Pro_RootPath."../ui/userlogin.php");
     }
 	
 	function reg()
