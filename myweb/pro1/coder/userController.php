@@ -18,6 +18,29 @@ class userController extends phpBoss
 	
 	function reg()
 	{
+		if($_POST) 
+		{
+			$userName=$_POST["userName"];
+			$userPass=$_POST["userPass"];
+			if(!preg_match("/^[a-zA-z]\w{2,19}$/i", $userName))
+				echo "用户名不符合规则";
+			if(!preg_match("/^\w{3,20}$/i", $userPass))
+				echo "密码不符合规则";
+				
+			$sql='insert into myuser(user_name,user_pass,user_regdate) '
+			.' values(:user_name,:user_pass,now())';
+			$paramSet=array('user_name'=>$userName,'user_pass'=>$userPass);
+			
+			$db=new dbutil();
+			$db->queryForParam($sql,$paramSet);
+			$getUserID=$db->db->lastInsertId();
+			if($getUserID && trim($getUserID)!="")
+				echo "用户注册成功，他的ID是:".$getUserID;
+			else
+				echo "用户注册失败";
+		}
+		
+		$title = "用户注册";
 		include(Pro_RootPath."../ui/userreg.php");
 	}
 	
@@ -65,6 +88,7 @@ class userController extends phpBoss
             }
         }*/
         
+        $title = "用户登录";
         include(Pro_RootPath."../ui/userlogin.php");
 	}
 

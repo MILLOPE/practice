@@ -19,8 +19,9 @@ class dbutil
 		$pre_result=$this->db->prepare($sql);
 		//var_export($pre_result);
 		
-		foreach ($setParam as $key=>$value)
+		foreach ($setParam as $key=>&$value)
 		{
+			//$pre_result->bindParam(":".$key,$setParam[$key]);
 			$pre_result->bindParam(":".$key,$value);
 		}
 		
