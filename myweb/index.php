@@ -15,7 +15,7 @@
     $userisvip=false; //临时变量
     
     //3、加载UI做的页面
-    
+
     //必须实例化相应的类
     $className=$get_M."Controller";//类名
     $get_class=new $className();

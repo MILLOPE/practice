@@ -12,8 +12,8 @@ class userController extends phpBoss
     {
         extract($this->getTplVars());
         //echo $_SERVER["REQUEST_URI"];
-        
-        include(Pro_RootPath."../ui/userlogin.php");
+        $this->login();
+        //include(Pro_RootPath."../ui/userlogin.php");
     }
 	
 	function reg()
@@ -22,18 +22,37 @@ class userController extends phpBoss
 		{
 			$userName=$_POST["userName"];
 			$userPass=$_POST["userPass"];
+			$userQQ=$_POST["userQQ"];
 			if(!preg_match("/^[a-zA-z]\w{2,19}$/i", $userName))
 				echo "用户名不符合规则";
 			if(!preg_match("/^\w{3,20}$/i", $userPass))
 				echo "密码不符合规则";
-				
+
+            $db=new dbutil();
+            $db->db->beginTransaction();//开启事务
+
 			$sql='insert into myuser(user_name,user_pass,user_regdate) '
-			.' values(:user_name,:user_pass,now())';
+			.' values(:user_name,:user_pass,now())';//插入主表
 			$paramSet=array('user_name'=>$userName,'user_pass'=>$userPass);
-			
-			$db=new dbutil();
+
 			$db->queryForParam($sql,$paramSet);
-			$getUserID=$db->db->lastInsertId();
+			$getUserID=$db->db->lastInsertId();//获取用户id
+
+            //插入用户子表
+            $sql='insert into user_info(user_id,user_qq) '
+                .' values(:user_id,:user_qq)';
+            $paramSet=array('user_id'=>$getUserID,'user_qq'=>$userQQ);
+            $db->queryForParam($sql,$paramSet);
+            $getInfoID=$db->db->lastInsertId();//获取用户信息id
+
+            if($getInfoID && intval($getInfoID)>0) {
+                echo "commit";
+                $db->db->commit();
+            }else {
+                echo "rollBack";
+                $db->db->rollBack();
+            }
+
 			if($getUserID && trim($getUserID)!="")
 				echo "用户注册成功，他的ID是:".$getUserID;
 			else
@@ -51,29 +70,30 @@ class userController extends phpBoss
             header("location:/news");
             exit();
         }
-        
-        $db=new dbutil();
-        //$sql="select * from myuser where user_name='".$_POST["userName"]."'";
-        //$ret=$db->queryForArray($sql);
-        
-        $sql="select * from myuser where user_name=:username";
-        $setParam=array("username"=>$_POST["userName"]);
-        $ret=$db->queryForParam($sql,$setParam);
-        
-        //var_export($ret);echo "<br>";
-       		
-       	if($ret && count($ret)==1) {
-       		$ret=$ret[0];
-       		if($ret["user_pass"]==$_POST["userPass"]) {
-       			echo "登录成功";
-       		}
-       		else {
-       			echo "密码错误";
-       		}
-       	}
-       	else {
-       		echo "没有该用户";
-       	}
+        if($_POST && $_POST["userName"]) {
+            $db=new dbutil();
+            //$sql="select * from myuser where user_name='".$_POST["userName"]."'";
+            //$ret=$db->queryForArray($sql);
+
+            $sql="select * from myuser where user_name=:username";
+            $setParam=array("username"=>$_POST["userName"]);
+            $ret=$db->queryForParam($sql,$setParam);
+            //var_export($ret);echo "<br>";
+
+            if($ret && count($ret)==1) {
+                $ret=$ret[0];
+                if($ret["user_pass"]==$_POST["userPass"]) {
+                    echo "登录成功";
+                }
+                else {
+                    echo "密码错误";
+                }
+            }
+            else {
+                echo "没有该用户";
+            }
+        }
+
         
         
         /*if($_POST &&  $_POST["userName"]){
