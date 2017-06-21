@@ -17,7 +17,8 @@
         <?php 
         
         if($_COOKIE["UserInfo_UserName"]) {
-        	echo myDecrypt(Crypt_MyKey, $_COOKIE["UserInfo_UserName"])."已经登录";
+        	$get_user=unserialize(myDecrypt(Crypt_MyKey, $_COOKIE["UserInfo_UserName"]));
+        	echo $get_user->user_name."已经登录，他的ID是".$get_user->id;
         }
 		else {
 			echo "游客状态";

@@ -3,6 +3,7 @@
  * 作者：张三
  * 类功能：用户登录、注册其他个人修改等
  */
+
 class userController extends phpBoss
 {
     var $_tpl_vars=array("title"=>"用户登录");
@@ -70,7 +71,8 @@ class userController extends phpBoss
             header("location:/news");
             exit();
         }*/
-     	
+     
+			
         if($_POST && $_POST["userName"]) {
             $db=new dbutil();
             //$sql="select * from myuser where user_name='".$_POST["userName"]."'";
@@ -85,7 +87,9 @@ class userController extends phpBoss
                 $ret=$ret[0];
                 if($ret["user_pass"]==$_POST["userPass"]) {
                     echo "登录成功";
-					setcookie("UserInfo_UserName",myCrypt(Crypt_MyKey, $_POST["userName"]),time()+30,"/");
+					$user->user_name=$ret["user_name"];
+					$user->id=$ret["id"];
+					setcookie("UserInfo_UserName",myCrypt(Crypt_MyKey, serialize($user)),time()+30,"/");
                 }
                 else {
                     echo "密码错误";
