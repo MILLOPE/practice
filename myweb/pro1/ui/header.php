@@ -13,5 +13,15 @@
         	<?php if(!$this->_isinner) echo " && 旗下BB网" ?>
         <a href="/news">主站新闻</a> |
         <a href="/bbnews">bb网新闻</a> |
-        <a href="/user">用户登录</a> |
+        <a href="/user">用户登录</a> | 
+        <?php 
+        
+        if($_COOKIE["UserInfo_UserName"]) {
+        	echo $_COOKIE["UserInfo_UserName"]."已经登录";
+        }
+		else {
+			echo "游客状态";
+		}
+        
+        ?>
     </div>
