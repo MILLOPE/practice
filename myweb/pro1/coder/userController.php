@@ -70,12 +70,7 @@ class userController extends phpBoss
             header("location:/news");
             exit();
         }*/
-        $iv=mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_DES, MCRYPT_MODE_ECB),MCRYPT_RAND);
-		echo "iv:".$iv."<br/>";
-		$str=mcrypt_encrypt(MCRYPT_DES, "12345", "shenyi", MCRYPT_MODE_ECB,$iv);
-		echo $str."<br/>";
-        $de_str=mcrypt_decrypt(MCRYPT_DES, "12345", $str, MCRYPT_MODE_ECB,$iv);
-		echo $de_str;
+     	
         if($_POST && $_POST["userName"]) {
             $db=new dbutil();
             //$sql="select * from myuser where user_name='".$_POST["userName"]."'";
@@ -90,7 +85,7 @@ class userController extends phpBoss
                 $ret=$ret[0];
                 if($ret["user_pass"]==$_POST["userPass"]) {
                     echo "登录成功";
-					setcookie("UserInfo_UserName",$_POST["userName"],time()+30,"/");
+					setcookie("UserInfo_UserName",myCrypt(Crypt_MyKey, $_POST["userName"]),time()+30,"/");
                 }
                 else {
                     echo "密码错误";

@@ -17,7 +17,7 @@
         <?php 
         
         if($_COOKIE["UserInfo_UserName"]) {
-        	echo $_COOKIE["UserInfo_UserName"]."已经登录";
+        	echo myDecrypt(Crypt_MyKey, $_COOKIE["UserInfo_UserName"])."已经登录";
         }
 		else {
 			echo "游客状态";

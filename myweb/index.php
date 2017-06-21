@@ -1,7 +1,8 @@
 ﻿<?php
     require("config.php");
     //0、加载项目经理做的代码
-    require(Pro_RootPath."../leader.php");
+    require(Pro_RootPath."../leader.php");//加载全局通用函数;s
+    require(Pro_RootPath."../functions.php");
     require(Pro_RootPath."phpBoss.php");
     require(Pro_RootPath."../db/dbutil.php");
 
