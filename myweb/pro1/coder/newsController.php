@@ -11,13 +11,16 @@ class newsController extends phpBoss
     {
     	extract($this->getTplVars());
         global $userisvip;
-        if($userisvip)
+        
+        $db=new dbutil();
+        $newslist=$db->queryForArray("select * from news order by id desc limit 0,10;");
+		$userlist=$db->queryForArray("select * from myuser order by id desc;");
+        //var_export($newslist);
+		
+		if($userisvip)
             include("/pro1/ui/newslist_vip.php");
         else
             include("/pro1/ui/newslist.php");
-        $db=new dbutil();
-        $ret=$db->queryForArray("select * from news");
-        var_export($ret);
     }
     function getTplVars()
     {
