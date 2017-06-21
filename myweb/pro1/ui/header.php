@@ -6,6 +6,7 @@
             .login{width:600px;border:solid 1px gray;text-align:center;margin:80px auto;background: #ececec}
             .login .title{font-weight:bold;color:#666;}
         </style>
+        <script src="jq.js"></script>
     </head>
 <body>
     <div style="border-bottom: 1px solid gray;line-height: 21pt;background: #ececec">

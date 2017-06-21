@@ -99,7 +99,11 @@ class userController extends phpBoss
                 echo "没有该用户";
             }
         }
-
+		
+		if(isset($_POST["ajax"]))
+		{
+			exit();
+		}
         
         
         /*if($_POST &&  $_POST["userName"]){
