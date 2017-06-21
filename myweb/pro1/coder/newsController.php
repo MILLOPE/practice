@@ -9,13 +9,21 @@ class newsController extends phpBoss
     //运行新闻的程序
     function run()
     {
-    	extract($this->getTplVars());
         global $userisvip;
         
         $db=new dbutil();
-        $newslist=$db->queryForArray("select * from news order by id desc limit 0,10;");
-		$userlist=$db->queryForArray("select * from myuser order by id desc;");
+
+        //$newslist=$db->queryForArray("select * from news order by id desc limit 0,10;");
+		//$userlist=$db->queryForArray("select * from myuser order by id desc;");
+
         //var_export($newslist);
+		
+		$result=$db->queryForArray("select * from news order by id desc limit 0,10;select * from myuser order by id desc;");
+		
+		$this->_tpl_vars["newslist"]=$result[0];
+		$this->_tpl_vars["userlist"]=$result[1];
+		
+    	extract($this->getTplVars());
 		
 		if($userisvip)
             include("/pro1/ui/newslist_vip.php");

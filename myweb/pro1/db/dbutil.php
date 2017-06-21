@@ -13,7 +13,25 @@ class dbutil
 		//不设置，同时显示列名序号;
 		$result->setFetchMode(PDO::FETCH_ASSOC);//只出现列名;
 		//$result->setFetchMode(PDO::FETCH_NUM);//只显示序号;
-		return $result->fetchAll();
+		//return $result->fetchAll();
+		
+		$result_set=array();
+		do{
+			$result_set[]=$result->fetchAll();
+		}
+		while($result->nextRowset());
+		
+		if(count($result_set)==1)
+		{
+			return $result_set[0];
+		}
+		else if(count($result_set)>1){
+			return $result_set;
+		}
+		else
+		{
+			return array(0);
+		}
 	}
 	function queryForParam($sql,$setParam) {
 		$pre_result=$this->db->prepare($sql);
