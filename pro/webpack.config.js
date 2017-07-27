@@ -1,4 +1,5 @@
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+var path = require("path");
 var config = {
     entry: {
         webindex: "./src/js/index"
@@ -22,6 +23,11 @@ var config = {
     externals: {
         "react": "React",
         "react-dom": "ReactDOM"
+    },
+    devServer: {
+        contentBase: path.join(__dirname, "dist"),
+        compress: true,
+        port: 9000
     }
 };
 
