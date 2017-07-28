@@ -14,9 +14,12 @@ let teammates=[
 
 class Team extends React.Component
 {
-    constructor(){
-        super();
-        this.abc="BCD";
+    constructor(props){
+        super(props);
+        this.state={
+            teammates:props.teammates,
+            leader:props.leader
+        }
     }
     render()
     {
@@ -25,14 +28,16 @@ class Team extends React.Component
             {this.props.teammates.map((item)=>{
                 return <h2>{item.name}_{item.age}</h2>
             })}
-            <h1>项目经理：{this.props.leader}</h1>
+            <h1>项目经理：{this.state.leader}</h1>
             <div>
                 <input type="button" value="改变" onClick={()=>{
-                    //this.props.leader="abc";
+
                     this.props.teammates[0].name="王五";
-                    //alert(this.props.teammates[0].name);
+                    this.setState({
+                        leader:"xiawei"
+                    });
                     //this.setState();
-                    this.forceUpdate();
+                    //this.forceUpdate();
                 }
                 }/>
             </div>
@@ -42,6 +47,6 @@ class Team extends React.Component
 }
 
 ReactDOM.render(
-    <Team teammates={teammates} leader="shenyi" />,
+    <Team teammates={teammates} leader="shenyi"/>,
     document.getElementById("root")
 );
