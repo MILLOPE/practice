@@ -1,43 +1,51 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-let teammates=[
-    {
-        name:"lis",
-        age:21
-    },
-    {
-        name:"zhangsan",
-        age:23
-    }
-];
+import axios from 'axios';
 
 class Team extends React.Component
 {
     constructor(props){
         super(props);
+        this.loadingBox=[];
         this.state={
-            teammates:props.teammates,
-            leader:props.leader
+            teammates:[],
+            leader:""
         }
+    }
+    showLoading(isShow)
+    {
+        let display=isShow?"block":"none";
+        this.loadingBox.forEach((item)=>{
+            item.style.display=display;
+        })
+    }
+    componentWillMount()
+    {
+        this.showLoading(true);
+        axios.get("http://localhost:8900/team.php")
+            .then((res)=>{
+                this.setState({
+                    leader: res.data.leader,
+                    teammates: res.data.teammates
+                });
+                this.showLoading(false);
+            })
     }
     render()
     {
         return <div>
-            <h1>团队成员</h1>{this.abc}
-            {this.props.teammates.map((item)=>{
+            <h1>团队成员</h1>
+            <span ref={(span)=>{this.loadingBox.push(span)}}>正在加载...</span>
+            {this.state.teammates.map((item)=>{
                 return <h2>{item.name}_{item.age}</h2>
             })}
-            <h1>项目经理：{this.state.leader}</h1>
+            <h1>项目经理：{this.state.leader}<span ref={(span)=>{this.loadingBox.push(span)}}>加载</span></h1>
             <div>
                 <input type="button" value="改变" onClick={()=>{
-
-                    this.props.teammates[0].name="王五";
+                    this.state.teammates[0].name="王五";
                     this.setState({
                         leader:"xiawei"
                     });
-                    //this.setState();
-                    //this.forceUpdate();
                 }
                 }/>
             </div>
@@ -47,6 +55,6 @@ class Team extends React.Component
 }
 
 ReactDOM.render(
-    <Team teammates={teammates} leader="shenyi"/>,
+    <Team />,
     document.getElementById("root")
 );
