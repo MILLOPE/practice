@@ -1,19 +1,31 @@
 var abc = require("jquery");
 
 var getlib = require("slib");
-//getlib.showName();
+var getobj = require("./test");
 
 var file = require("fs");
 file.writeFile("build.js","");
-
+//console.log(global.process.mainModule.children)
 function genCode(key,value)
 {
     return "var "+key+"="+value+";\n";
 }
 
-for (var aa in getlib)
+file.readFile("./a.css",function(err,data){
+    if(err)
+    {
+        //代表出错
+    }
+    else
+    {
+        file.appendFile("build.js","document.write('<style>"+data+"</style>');")
+    }
+});
+
+for(var i=0;i< global.process.mainModule.children.length;i++)
 {
-    file.appendFile("build.js",genCode(aa,getlib[aa]));
-    //console.log(getlib[aa])
+    var child=global.process.mainModule.children[i];
+    for(var bb in child.exports)// child.exports就是我们导出的属性
+        file.appendFile('build.js',genCode(bb,child.exports[bb]));
+
 }
-file.appendFile("build.js","showName();\n");
