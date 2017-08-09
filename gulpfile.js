@@ -1,5 +1,7 @@
 var gp=require("gulp");
 
 gp.task("shenyi",function(){
-   console.log("i am gulp");
+
+    gp.src(["*.js","!gulpfile.js"]).pipe(gp.dest("./build/js"));
+    gp.src(["*.css"]).pipe(gp.dest("./build/css"))
 });
