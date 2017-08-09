@@ -18,7 +18,18 @@ file.readFile("./a.css",function(err,data){
     }
     else
     {
-        file.appendFile("build.js","document.write('<style>"+data+"</style>');")
+        var pattern = /['|"](.*\.jpg)['|"]/g;
+        var res;
+        while (res=pattern.exec(data.toString()))
+        {
+            //console.log(res[1])
+            var getImg=file.readFileSync(res[1]);
+            console.log(getImg.toString("base64"));
+            data=data.toString().replace(res[1],"data:image;base64,"+getImg.toString("base64")).trim();
+            file.appendFile("build.js","document.write('<style>"+data+"</style>');")
+        }
+
+
     }
 });
 
