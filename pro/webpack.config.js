@@ -20,10 +20,10 @@ var config = {
             { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
         ]
     },
-    externals: {
+    /*externals: {
         "react": "React",
         "react-dom": "ReactDOM"
-    },
+    },*/
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
