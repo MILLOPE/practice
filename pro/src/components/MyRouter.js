@@ -1,9 +1,15 @@
 import React from "react";
 import ProductTopList from "./ProductTopList";
 import NewsTopList from "./NewsTopList";
+import InfoDetail from "./InfoDetail";
 
-import {
+/*import {
     BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom';*/
+import {
+    HashRouter as Router,
     Route,
     Link
 } from 'react-router-dom';
@@ -24,7 +30,8 @@ export default class MyRouter extends React.Component
 
                 <Route exact path="/" component={ProductTopList}/>
                 <Route path="/products" component={ProductTopList}/>
-                <Route path="/news" component={NewsTopList}/>
+                <Route exact path="/news" component={NewsTopList}/>
+                <Route path="/news/:newsid" component={InfoDetail}/>
             </div>
         </Router>
     }

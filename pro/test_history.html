@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function go(path) {
+            let   state = {
+
+                url: path,
+                name:"shenyi"
+            };
+            history.pushState(state,null,path);
+
+        }
+
+        window.onpopstate = function(event) {
+            alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+        };
+    </script>
+</head>
+<body>
+
+<a   onclick="go('abc')" style="cursor: pointer">进入abc地址</a>
+<a onclick="go('/')" style="cursor: pointer">进入/地址</a>
+
+ <button onclick="history.back()">回退</button>
+<button onclick="history.go(-2)">前进</button>
+</body>
+</html>
