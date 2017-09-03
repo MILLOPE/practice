@@ -27,12 +27,13 @@ module.exports =
     },*/
     module: {
         rules: [
-            {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}
+            {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
+            {test: /\.vue$/, exclude: /node_modules/, loader:"babel-loader!vue-loader"}
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            filename:'./webapp/index.html',//目标文件
+            filename:'./index.html',//目标文件
             template: __dirname + '/src/html/index.html',//模板文件
             inject: 'body',
             hash: true,//代表js后跟一个随机字符串
