@@ -1,14 +1,15 @@
 <style>
-    #me {
+    #myage {
         color: red;}
 </style>
 <template>
-    <div id="me">我的是{{age}}</div>
+    <div id="myage">我的年龄是{{value}}</div>
 </template>
 <script>
 export default {
-    data: ()=>{
+    props: ['value']
+    /*data: ()=>{
         return {age: '18'};
-    }
+    }*/
 };
 </script>

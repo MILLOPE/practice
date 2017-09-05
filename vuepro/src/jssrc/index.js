@@ -1,9 +1,9 @@
 import Vue from "vue";
 
-import me_name from "../components/myage.vue";
+import me from "./../components/me.vue";
 
 let param = {
     el: '.container',
-    components:{'myname':me_name},
+    components:{'me':me},
 };
 new Vue(param);
