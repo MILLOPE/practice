@@ -3,7 +3,7 @@
         color: red;}
 </style>
 <template>
-    <div id="me">我的年龄是{{age}}</div>
+    <div id="me">我的是{{age}}</div>
 </template>
 <script>
 export default {

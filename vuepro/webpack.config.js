@@ -5,9 +5,11 @@ module.exports =
 {
     entry:
         {
-            "index": __dirname + '/src/jssrc/index.js',
+            //"index": [__dirname + '/src/jssrc/index.js','webpack-dev-server/client?http://127.0.0.1:8080/']
+            "index": __dirname + '/src/jssrc/index.js'
         },
     output: {
+        //publicPath: "http://127.0.0.1:8080/",
         path: __dirname + '/src/webapp/js',  //输出文件夹
         filename: '[name].js'   //最终打包生成的文件名(just 文件名，不带路径的哦)
     },
@@ -33,17 +35,18 @@ module.exports =
     },
     plugins: [
         new HtmlWebpackPlugin({
-            filename:'./index.html',//目标文件
+            //filename: __dirname + '/src/webapp/js/index.html',//目标文件
+            filename: 'index.html',
             template: __dirname + '/src/html/index.html',//模板文件
             inject: 'body',
             hash: true,//代表js后跟一个随机字符串
             chunks: ["index"]
         })
     ],
-    devServer: {
+    /*devServer: {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
         port: 9000
-    }
+    }*/
 
 };
