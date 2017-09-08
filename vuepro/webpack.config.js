@@ -30,7 +30,8 @@ module.exports =
     module: {
         rules: [
             {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
-            {test: /\.vue$/, exclude: /node_modules/, loader:"babel-loader!vue-loader"}
+            {test: /\.vue$/, exclude: /node_modules/, loader:"babel-loader!vue-loader"},
+            {test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/, loader:"file-loader"}
         ]
     },
     plugins: [
@@ -43,10 +44,10 @@ module.exports =
             chunks: ["index"]
         })
     ],
-    /*devServer: {
-        contentBase: path.join(__dirname, "dist"),
-        compress: true,
+    devServer: {
+        //contentBase: path.join(__dirname, "dist"),
+        //compress: true,
         port: 9000
-    }*/
+    }
 
 };

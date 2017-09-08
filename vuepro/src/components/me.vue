@@ -1,16 +1,25 @@
+<style>
+    #me{
+        color: violet;
+    }
+</style>
 <template>
-    <div id="me">
-        <myage value="21"></myage>
-        <myname value="lisi"></myname>
+    <div id="me" v-bind:title="value">me {{value}} {{name}} {{age}}
+        <name v-bind:name="name"></name>
+        <age v-bind:age="age"></age>
     </div>
 </template>
 <script>
-    import myage from './myage.vue';
-    import myname from './myname.vue';
+    import name from './name.vue';
+    import age from './age.vue';
     export default {
-        components:{
-            'myage':myage,
-            "myname":myname
-        }
+        props:['name','age'],
+        data(){
+            return {
+                value: 'hello'
+            };
+        },
+        components:{name,age}
+
     }
 </script>

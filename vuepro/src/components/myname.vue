@@ -1,15 +1,17 @@
 <style>
-    #myage {
-        color: blue;
+    #age {
+        color: red;
     }
 </style>
 <template>
-    <div id="myname">
-        我的名字是{{value}}
-    </div>
+    <div id="age">我的名字{{name}}</div>
 </template>
 <script>
     export default {
-        props:['value']
+        data:() => {
+            return {
+                name: 'hello'
+            }
+        }
     }
 </script>
