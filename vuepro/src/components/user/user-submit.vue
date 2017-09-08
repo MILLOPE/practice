@@ -10,7 +10,9 @@
         methods: {
             test () {
                 //alert(this.$parent.$children[0].username)
-                console.log(this.$parent.$refs.uname.$data.username)
+                //alert(this.$parent.$refs.uname.$data.username)
+                alert('username:'+this.$parent.$data.username+'\n'+'userpass:'+this.$parent.$data.userpass)
+
             }
         }
     }

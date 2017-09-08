@@ -3,7 +3,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">userpass</label>
             <div class="col-sm-10">
-                <input type="text" v-model="userpass" class="form-control" :placeholder="placeholder">
+                <input type="text" v-model="userpass" v-on:change="setUserPass" class="form-control" :placeholder="placeholder">
             </div>
         </div>
     </div>
@@ -14,6 +14,11 @@
         data () {
             return {
                 userpass: ''
+            }
+        },
+        methods:{
+            setUserPass(){
+                this.$emit('updateUserPass',this.userpass);
             }
         }
     }
