@@ -31,4 +31,11 @@ let p4 = {
     el: '.container',
     components: {'user-login':userlogin}
 }
-new Vue(p4);
+let myvue=new Vue(p4);
+
+window.onhashchange=function(){
+    if(window.location.hash==='#admin')
+        myvue.$children[0].$data.isadmin=true;
+    else
+        myvue.$children[0].$data.isadmin=false;
+}
