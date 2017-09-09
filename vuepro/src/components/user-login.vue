@@ -11,6 +11,7 @@
         <form class="form-horizontal" role="form">
             <user-name ref="uname" v-on:updateUserName="setUserName" placeholder="input username"></user-name>
             <user-pass ref="upass" v-on:updateUserPass="setUserPass" placeholder="input userpass"></user-pass>
+            <user-area v-on:childChange="setValue"></user-area>
             <user-submit></user-submit>
             <input type="button" value="test" v-on:click="show">
         </form>
@@ -20,12 +21,14 @@
     import username from './user/user-name.vue';
     import userpass from './user/user-pass.vue';
     import usersubmit from './user/user-submit.vue';
+    import userarea from './user/user-area.vue';
     export default {
         data () {
             return {
                 username:'',
                 userpass:'',
-                isadmin:false
+                isadmin:false,
+                userarea:0
             }
         },
         methods:{
@@ -38,14 +41,19 @@
             getisAdmin(){
                 return location.hash === '#admin';
             },
+            setValue(key,value){
+                this.$data[key]=value;
+            },
             show(){
-                this.isadmin=!this.isadmin;
+                //this.isadmin=!this.isadmin;
+                alert(this.userarea);
             }
         },
         components: {
             'user-name': username,
             'user-pass': userpass,
-            'user-submit': usersubmit
+            'user-submit': usersubmit,
+            'user-area': userarea
         }
     }
 </script>
