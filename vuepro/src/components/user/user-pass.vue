@@ -18,7 +18,8 @@
         },
         methods:{
             setUserPass(){
-                this.$emit('updateUserPass',this.userpass);
+                //this.$emit('updateUserPass',this.userpass);
+                this.$emit('childChange','userpass',this.userpass)
             }
         }
     }

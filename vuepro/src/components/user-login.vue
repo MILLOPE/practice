@@ -9,8 +9,8 @@
         <h2 class="text-center" v-if="isadmin">Admin Login</h2>
         <h2 class="text-center" v-else>User Login</h2>
         <form class="form-horizontal" role="form">
-            <user-name ref="uname" v-on:updateUserName="setUserName" placeholder="input username"></user-name>
-            <user-pass ref="upass" v-on:updateUserPass="setUserPass" placeholder="input userpass"></user-pass>
+            <user-name ref="uname" v-on:childChange="setValue" placeholder="input username"></user-name>
+            <user-pass ref="upass" v-on:childChange="setValue" placeholder="input userpass"></user-pass>
             <user-area v-on:childChange="setValue"></user-area>
             <user-submit></user-submit>
             <input type="button" value="test" v-on:click="show">
