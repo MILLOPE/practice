@@ -27,9 +27,20 @@ let p3 = {
 }*/
 
 import userlogin from './../components/user-login.vue';
+import pagenav from './../components/page-nav.vue';
+import newslist from './../components/news-list.vue';
+import VueRouter from 'vue-router';
+
+Vue.use(VueRouter);
+
+/*
 let p4 = {
     el: '.container',
-    components: {'user-login':userlogin}
+    components: {
+        'user-login':userlogin,
+        'page-nav':pagenav,
+        'news-list':newslist
+    }
 }
 let myvue=new Vue(p4);
 
@@ -38,4 +49,16 @@ window.onhashchange=function(){
         myvue.$children[0].$data.isadmin=true;
     else
         myvue.$children[0].$data.isadmin=false;
-}
+}*/
+
+const routerConfig = new VueRouter({
+    routes:[
+        { path: '/news', component: newslist },
+        { path: '/login', component: userlogin }
+    ]
+});
+Vue.component('page-nav',pagenav);
+let myvue = new Vue({
+    el:'.container',
+    router:routerConfig,
+})
