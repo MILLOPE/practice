@@ -29,9 +29,12 @@ let p3 = {
 import userlogin from './../components/user-login.vue';
 import pagenav from './../components/page-nav.vue';
 import newslist from './../components/news-list.vue';
+import newsdetail from './../components/news-detail.vue';
 import VueRouter from 'vue-router';
+import axios from 'axios';
 
 Vue.use(VueRouter);
+Vue.prototype.$axios = axios;
 
 /*
 let p4 = {
@@ -53,8 +56,10 @@ window.onhashchange=function(){
 
 const routerConfig = new VueRouter({
     routes:[
-        { path: '/news', component: newslist },
-        { path: '/login', component: userlogin }
+        { path: '/', component: newslist },
+        { path: '/news', component: newslist, name:'newslist'},
+        { path: '/news/:newsid', component: newsdetail, name:'newsdetail'},
+        { path: '/login', component: userlogin, name:'userlogin'}
     ]
 });
 Vue.component('page-nav',pagenav);

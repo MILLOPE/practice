@@ -1,5 +1,4 @@
 <style>
-    @import "./../css/bootstrap.css";
     #user{
         margin-top: 50px;
     }
