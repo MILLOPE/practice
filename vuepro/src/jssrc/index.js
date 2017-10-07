@@ -26,15 +26,22 @@ let p3 = {
     components: {me}
 }*/
 
-import userlogin from './../components/user-login.vue';
+// import userlogin from './../components/user-login.vue';
 import pagenav from './../components/page-nav.vue';
-import newslist from './../components/news-list.vue';
+// import newslist from './../components/news-list.vue';
 import newsdetail from './../components/news-detail.vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 
 Vue.use(VueRouter);
 Vue.prototype.$axios = axios;
+
+const userlogin = r => {
+    r(require('./../components/user-login.vue'));
+};
+const newslist = b => {
+    b(require('./../components/news-list.vue'));
+};
 
 /*
 let p4 = {

@@ -22,7 +22,7 @@
   },
   "scripts": {
     "b": "webpack -p",
-    "build": "webpack",
+    "build": "webpack --config webpack.config.build.js",
     "dev": "webpack-dev-server --inline --hot --content-base ./src/webapp"
   }
 }
