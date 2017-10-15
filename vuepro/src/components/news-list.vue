@@ -1,7 +1,7 @@
 <template>
     <div class="news-list">
         <div class="row">
-            <div class="page-header" v-for="news in newslist">
+            <div class="page-header" v-for="news in this.$store.getters.getNews">
                 <h2><router-link :to="{ name: 'newsdetail', params: { newsid: news.newsid }}">{{news.title}}</router-link> <small>{{news.pubtime}}</small></h2>
                 <p>
                     {{news.desc}}
@@ -18,7 +18,18 @@
 <script>
      
     export default{
-        data(){
+        created() {
+            if(this.$store.state.newslist.length==0) {
+                this.$axios.get('http://localhost:8900/newslist.php')
+                    .then((response)=> {
+                        this.$store.state.newslist = response.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        },
+        /*data(){
             return{
                 newslist:[
                     {newsid:101,pubtime:"2016-10-02",title:"QFix 探索之路 —— 手Q热补丁轻量级方案 ",desc:"QFix是手Q团队近期推出的一种新的Android热补丁方案，在不影响App运行时性能（无需插桩去preverify）的前提下有效地规避了"},
@@ -28,7 +39,7 @@
 
                 ]
             }
-        }
+        }*/
 
     }
 </script>
