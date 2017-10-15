@@ -37,10 +37,14 @@ Vue.use(VueRouter);
 Vue.prototype.$axios = axios;
 
 const userlogin = r => {
-    r(require('./../components/user-login.vue'));
+    require.ensure([],()=>{
+        r(require('./../components/user-login.vue'));
+    });
 };
 const newslist = b => {
-    b(require('./../components/news-list.vue'));
+    require.ensure([],()=>{
+        b(require('./../components/news-list.vue'));
+    });
 };
 
 /*

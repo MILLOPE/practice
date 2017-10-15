@@ -1,5 +1,5 @@
 <style>
-    @import "./../css/bootstrap.css";
+
 </style>
 <template>
     <nav class="navbar navbar-default">
