@@ -20,7 +20,8 @@
             userNameChange()
             {
                 //this.$emit("updateUserName",this.username)
-                this.$emit('childChange','username',this.username)
+                //this.$emit('childChange','username',this.username)
+                this.$store.state.user_name = this.username;
             }
         }
     }

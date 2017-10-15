@@ -36,6 +36,21 @@ import axios from 'axios';
 Vue.use(VueRouter);
 Vue.prototype.$axios = axios;
 
+import Vuex from 'vuex';
+Vue.use(Vuex);
+
+const vuex_store = new Vuex.Store({
+    state: {
+        user_name:''
+    },
+    mutations: {
+        showUserName(state)
+        {
+            alert(state.user_name);
+        }
+    }
+})
+
 const userlogin = r => {
     require.ensure([],()=>{
         r(require('./../components/user-login.vue'));
@@ -76,5 +91,6 @@ const routerConfig = new VueRouter({
 Vue.component('page-nav',pagenav);
 let myvue = new Vue({
     el:'.container',
+    store: vuex_store,
     router:routerConfig,
 })
