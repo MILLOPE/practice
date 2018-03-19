@@ -9,7 +9,7 @@ export default class Passport
         if(uname==="shenyi" && upass==="123")
         {
             this.islogin=true;
-            callback();
+            setTimeout(callback,1000);
         }
         else
         {

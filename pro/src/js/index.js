@@ -37,7 +37,7 @@ class InfoDetail extends React.Component {
   addTest() {
     this.props.Store.dispatch({type: "test"});
   }
-  
+
   render() {
     return <div>
       <h2>新闻标题：{this.props.Store.getState().title}</h2>
