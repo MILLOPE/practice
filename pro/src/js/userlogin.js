@@ -10,8 +10,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(UserReduce, /*preloadedState,*/ composeEnhancers(
   applyMiddleware(saga)
 ));
-// saga.run(UserSaga);
-saga.run(UserSagaNew);
+saga.run(UserSaga);
+// saga.run(UserSagaNew);
 
 
 class UserLogin extends React.Component {

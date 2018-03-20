@@ -3,7 +3,8 @@ var path = require("path");
 var config = {
     entry: {
         webindex: "./src/js/index",
-        userlogin: "./src/js/userlogin"
+        userlogin: "./src/js/userlogin",
+        test: "./src/js/test",
     },
     output: {
         filename: "[name].js",
@@ -19,6 +20,11 @@ var config = {
             filename: "login.html",
             template: "./src/pages/userlogin.html",
             chunks: ["userlogin"]
+        }),
+        new HtmlWebpackPlugin({
+            filename: "test.html",
+            template: "./src/pages/test.html",
+            chunks: ["test"]
         })
     ],
     module: {

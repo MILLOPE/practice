@@ -46,7 +46,6 @@ function* user_login(action) {
   // const getUserName = yield select(state => state.userName);
   // const getUserPass = yield select(state => state.userPass);
   // yield call(UserAPI.userLogin, getUserName, getUserPass)
-
   yield put({type: 'ACTIVE_CHANGE', btnDisabled: true});
   const getState = yield select();
   const result = yield call(UserAPI.userLogin, getState.userName, getState.userPass);
