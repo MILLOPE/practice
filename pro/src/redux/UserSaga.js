@@ -1,4 +1,4 @@
-import { call, put, take, takeEvery, takeLatest, select } from 'redux-saga/effects'
+import { call, cancel, cancelled, fork, put, take, takeEvery, takeLatest, select } from 'redux-saga/effects'
 
 let agree = 21;
 
@@ -30,7 +30,7 @@ const userLevel = (token) => new Promise((resolve) => {
     else {
       resolve({level: 'none'});
     }
-  },1000)
+  },3000)
 })
 
 class UserAPI {
@@ -58,27 +58,56 @@ export function* UserSaga() {
   yield takeEvery('USER_LOGIN', user_login);
 }
 
-export function* UserSagaNew() {
-  const action = yield take('USER_LOGIN');
-  yield put({type: 'ACTIVE_CHANGE', btnDisabled: true});
-  const { token } = yield call(function* (){
-    const {userName, userPass} = yield select();
-    return (yield call(UserAPI.userLogin, userName, userPass));
-  });
+function* userLogin() {
+  try {
+    const { token } = yield call(function* (){
+      const {userName, userPass} = yield select();
+      return (yield call(UserAPI.userLogin, userName, userPass));
+    });
 
-  if(token && token !== 'none') {
-    yield put({type: 'LOGIN_SUCCESS'});
-    const {level} = yield call(UserAPI.getUserLevel, token);
-    if(level && level !== 'none') {
-      yield put({type: 'UPDATE_USERLEVEL', level})
+    if(token && token !== 'none') {
+      yield put({type: 'LOGIN_SUCCESS'});
+      yield call(getUserLevel, token);
     }
     else {
-      yield put({type: 'UPDATE_USERLEVEL', level: '获取等级失败'});
+      yield put({type: 'LOGIN_ERROR'});
     }
   }
-  else {
-    yield put({type: 'LOGIN_ERROR'});
-  }
+  catch(err) {
 
-  yield put({type: 'ACTIVE_CHANGE', btnDisabled: false});
+  }
+  finally {
+    if(yield cancelled()) {
+      yield put({type: 'UPDATE_USERLEVEL', level: '获取等级取消'});
+    }
+  }
+}
+
+function* getUserLevel(token) {
+  const {level} = yield call(UserAPI.getUserLevel, token);
+  if(level && level !== 'none') {
+    yield put({type: 'UPDATE_USERLEVEL', level})
+  }
+  else {
+    yield put({type: 'UPDATE_USERLEVEL', level: '获取等级失败'});
+  }
+}
+
+export function* UserSagaNew() {
+  while(true) {
+    const action = yield take('USER_LOGIN');
+    yield put({type: 'ACTIVE_CHANGE', btnDisabled: true});
+
+    // yield call(userLogin);
+    const task = yield fork(userLogin);
+
+    yield take('LOGIN_OUT');
+    if(task) {
+      yield cancel(task)
+    }
+
+    yield put({type: 'LOGIN_OUT_DONE'});
+
+    yield put({type: 'ACTIVE_CHANGE', btnDisabled: false});
+  }
 }

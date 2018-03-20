@@ -14,8 +14,7 @@ export default (state={btnDisabled:false, isLogin: false, myLevel: ''}, action) 
     return Object.assign({},state,{isLogin: true})
   }
 
-  if(action.type==="LOGIN_ERROR" || action.type==="LOGIN_OUT") {
-    console.log(action)
+  if(action.type==="LOGIN_ERROR" || action.type==="LOGIN_OUT_DONE") {
     return Object.assign({},state,{isLogin: false})
   }
 

@@ -57,12 +57,12 @@ class UserLogin extends React.Component {
       </div>
       <div>
         <span>用户等级：</span>
-        <span>{this.props.Store.getState().isLogin ? this.props.Store.getState().myLevel : '未登录无等级'}</span>
+        {/* <span>{this.props.Store.getState().isLogin ? this.props.Store.getState().myLevel : '未登录无等级'}</span> */}
+        <span>{this.props.Store.getState().myLevel}</span>
       </div>
       <div>
         <button disabled={this.props.Store.getState().btnDisabled} onClick={this.userSubmit.bind(this)}>登录</button>
         <button onClick={()=>{this.props.Store.dispatch({type: 'LOGIN_OUT'})}}>注销</button>
-
       </div>
     </div>
   }
