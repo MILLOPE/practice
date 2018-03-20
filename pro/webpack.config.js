@@ -5,6 +5,7 @@ var config = {
         webindex: "./src/js/index",
         userlogin: "./src/js/userlogin",
         test: "./src/js/test",
+        test_async: "./src/js/test_async",
     },
     output: {
         filename: "[name].js",
@@ -25,6 +26,11 @@ var config = {
             filename: "test.html",
             template: "./src/pages/test.html",
             chunks: ["test"]
+        }),
+        new HtmlWebpackPlugin({
+            filename: "test_async.html",
+            template: "./src/pages/test.html",
+            chunks: ["test_async"]
         })
     ],
     module: {
